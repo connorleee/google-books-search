@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import NavBar from "../components/navBar";
 import SearchBar from "../components/searchBar";
 import SearchResults from "../components/searchResults"
+import API from "../utils/API"
 
 class Search extends Component {
   state = {
@@ -21,12 +22,6 @@ class Search extends Component {
   //     .catch(err => console.log(err));
   // };
 
-  // deleteBook = id => {
-  //   API.deleteBook(id)
-  //     .then(res => this.loadBooks())
-  //     .catch(err => console.log(err));
-  // };
-
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -36,15 +31,12 @@ class Search extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    // if (this.state.title && this.state.author) {
-    //   API.saveBook({
-    //     title: this.state.title,
-    //     author: this.state.author,
-    //     synopsis: this.state.synopsis
-    //   })
-    //     .then(res => this.loadBooks())
-    //     .catch(err => console.log(err));
-    // }
+    console.log(process.env.API_KEY)
+    if (this.state.search) {
+      API.getBooks(this.state.search)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    }
   };
 
   render() {
