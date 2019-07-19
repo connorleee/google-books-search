@@ -15,11 +15,9 @@ class Search extends Component {
   // }
 
   // loadBooks = () => {
-  //   API.getBooks()
-  //     .then(res =>
-  //       this.setState({ books: res.data, title: "", author: "", synopsis: "" })
-  //     )
-  //     .catch(err => console.log(err));
+  //   API.getBooks("Cristo")
+  //   .then(res => this.setState({ books: res.data.items }))
+  //   .catch(err => console.log(err));
   // };
 
   handleInputChange = event => {
@@ -31,10 +29,10 @@ class Search extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    console.log(process.env.API_KEY)
+
     if (this.state.search) {
       API.getBooks(this.state.search)
-        .then(res => console.log(res))
+        .then(res => this.setState({ books: res.data.items }))
         .catch(err => console.log(err));
     }
   };
@@ -44,9 +42,9 @@ class Search extends Component {
       <div>
         <NavBar />
 
-        <SearchBar handleFormSubmit={this.handleFormSubmit} handleInputChange={this.handleInputChange}/>
+        <SearchBar handleFormSubmit={this.handleFormSubmit} handleInputChange={this.handleInputChange} />
 
-        <SearchResults />
+        <SearchResults books={this.state.books}/>
 
       </div>
     );

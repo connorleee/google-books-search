@@ -10,8 +10,11 @@ function SearchResults(props) {
                         <h4>Results</h4>
                     </div>
                 </div>
-
-                <BookCard />
+                <div>
+                    {props.books.map(book => (
+                        <BookCard key={book.id} title={book.volumeInfo.title} authors={book.volumeInfo.authors} link={book.volumeInfo.previewLink} img={book.volumeInfo.imageLinks.thumbnail} description={book.volumeInfo.description} />
+                    ))}
+                </div>
             </div>
         </div>
     )
